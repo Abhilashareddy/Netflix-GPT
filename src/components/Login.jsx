@@ -113,79 +113,70 @@ const Login = () => {
 
   return (
     <>
-      <div className='absolute'>
+      <div >
       
       <Header />
        
-       </div>
-       <div className="md:flex absolute z-50  md:mt-24">
-       <div className="w-[35%] hidden md:block ">
-       <img fetchpriority="high" src={BG_URL}  className="w-screen " alt='header-image' />
-
+       <div className='absolute'>
+     
+       <img  className="h-screen w-screen bg-cover bg-no-repeat " fetchpriority="high" src={BG_URL}  alt='header-image' />
         </div>
-        <div className="md:w-1/2 md:h-full md:px-4   ">
+
         <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className='mx-auto  md:mx-4  md:rounded-xl text-white bg-black md:opacity-90  p-12 w-100  md:h-[85%] md:w-[40%] ' >
-        <div className='container flex items-center justify-center h-screen md:h-[95%]'>
-          <div className='flex flex-col items-start w-full md:w-screen '>
+        className='w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80' >
+            
             <p className='text-white font-semibold text-3xl mb-6'>
               {isSignIn ? "Sign In" : "Sign Up"}
             </p>
+
             {isSignIn ? null : (
               <input
                 ref={name}
                 type='text'
-                className='px-4 py-3 mb-4 w-full bg-neutral-800 focus:bg-neutral-800 rounded-md'
-                placeholder='Name'
+                className='p-4 my-4 w-full bg-gray-700'
+                placeholder='Full Name'
               />
             )}
             <input
               ref={email}
               defaultValue={"test@netflix.com"}
               type='text'
-              className='px-4 py-3 mb-4 w-full bg-neutral-800 focus:bg-neutral-800 rounded-md'
-              placeholder='test@netflix.com'
+              className='p-4 my-4 w-full bg-gray-700'
+              placeholder='Email'
             />
             <input
               ref={password}
               type='password'
               defaultValue={'123456789'}
-              className='px-4 py-3 w-full bg-neutral-800 focus:bg-neutral-800 rounded-md'
-              placeholder='123456789'
+              className='p-4 my-4 w-full bg-gray-700'
+              placeholder='Password'
             />
 
-            <p className='text-red-500 font-semibold mt-2 text-lg'>{error}</p>
+            <p className='text-red-500 font-semibold mt-2 text-lg '>{error}</p>
+
+      
 
             <button
-              onClick={loading ? null : handleValidation}
-              className={`px-4 py-2 mt-8 rounded-md mb-2 bg-brand-red text-white font-semibold w-full ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              disabled={loading}>
-              {loading ?<><p className="ml-20"><InfinitySpin color="white" width='60'/></p></>  : isSignIn ? "Sign In" : "Sign up"}
+            className="p-4 my-6 bg-red-700 w-full rounded-lg"
+            onClick={handleValidation}
+            >
+            {isSignIn ? "Sign In" : "Sign Up"}
             </button>
 
             <p
               className='text-neutral-400 md: mt-7 cursor-pointer'
               onClick={toggleSignIn}>
-              {isSignIn ? "New to Netflix?" : "Already registered"}{" "}
+              {isSignIn ? "New to Netflix?" : "Already registered  "}{" "}
               <span className='text-white'>
-                {isSignIn ? "Sign Up now" : ""}{" "}
+                {isSignIn ? "Sign Up now" : "SignIn here"}{""}
               </span>
             </p>
-
-            <p className='text-neutral-400 text-xs'>
-              This page is protected by Google reCAPTCHA to ensure you&apos;re
-              not a bot.
-            </p>
-          </div>
-        </div>
       </form>
         </div>
-       </div>
+        
       
      
     </>

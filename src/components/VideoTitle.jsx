@@ -22,11 +22,11 @@ const VideoTitle = ({ title, overview }) => {
               <Play fill='black' className='inline mb-1' /> Play
             </button>
             </Link>
-            <Link to="/user">
+            
             <button className='px-4 md:hover:scale-95 py-1 md:px-8 md:py-2 rounded-md bg-gray-500 text-white bg-opacity-50 font-semibold text-xl'>
               <Info className='inline mb-1 ' /> Info
             </button>
-            </Link>
+            
             
           </div>
         </div>

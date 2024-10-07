@@ -2,15 +2,14 @@ import { useNavigate } from "react-router";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { Link } from "react-router-dom";
-import { LOGO, MOBILE_LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { USER_AVATAR,LOGO, MOBILE_LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
 import { toggleGPTSearch } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
-import { Rocket, ChevronDownCircle, } from "lucide-react";
+
 
 
 const Header = () => {
@@ -19,7 +18,6 @@ const Header = () => {
   const showGPT = useSelector((store) => store.gpt.showGPTSearch);
   const dispatch = useDispatch();
 
-  const [menuOpen, setMenuOpen] = useState(false);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -64,7 +62,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className=' fixed hidden md:flex bg-gradient-to-b w-screen flex-col md:flex-row justify-between from-black px-8 py-2 z-50'>
+      <div className=' fixed hidden md:flex bg-gradient-to-b w-screen flex-col md:flex-row justify-between from-black px-8 py-2 z-50 '>
         <img
           className='w-44 hidden md:block md:mx-0'
           src={LOGO}
@@ -72,18 +70,18 @@ const Header = () => {
         />
 
         {user && (
-          <div className='flex mt-3 mx-auto justify-between  md:mx-0 '>
+          <div className='flex mt-3 mx-auto justify-between  md:mx-0 md:p-2'>
             <div>
               {showGPT && (
                 <>
                 <select
                   onChange={handleLanguage}
                   name=''
-                  className='bg-brand-coal mr-2 text-xs text-white h-9 px-4  rounded-full'>
+                  className='bg-gray-900 mr-2  mt-3 text-sm  text-white h-9 px-4  rounded-lg'>
                   {SUPPORTED_LANGUAGES.map((lang) => (
                     <>
                    
-                    <option   className="rounded-full py-2 px-4" key={lang?.identifier} value={lang?.identifier}>
+                    <option   className="rounded-full py-2 h-9 px-4" key={lang?.identifier} value={lang?.identifier}>
                       {" "}
                       {lang?.name}
                     </option>
@@ -99,53 +97,25 @@ const Header = () => {
             <div title="GPT Mode">
               <button
                 onClick={handleGPTSearch}
-                className='px-3 w-[43px] mr-2  ml-2 py-3  hover:bg-opacity-80 bg-brand-charcoal rounded-full text-white font-semibold '>
-                {showGPT ? (
-                  <Rocket
-                    color='yellow'
-                    className='my-[-2px] py-1 ml-[-2px]'
-                    fill='yellow'
-                  />
-                ) : (
-                  <Rocket className=' my-[-2px] py-1 ml-[-2px]' />
-                )}
+                className='py-2 px-4 mx-4 my-3 bg-purple-800 text-white rounded-lg'>
+                {showGPT ? "Home":"GPT Search"
+                }
               </button>
             </div>
-
-            <div
-              className='flex cursor-pointer'
-              onClick={() => {
-                setMenuOpen(!menuOpen);
-              }}>
-              <img className='h-10 rounded-full' src={user?.photoURL} alt='' />
-              {/* */}
-              <ChevronDownCircle color='white' className='mt-2 ml-1' />
-            </div>
+         
+          <div onClick={handleSignOut}
+          className="hover:rounded-md hover:bg-gray-500 px-1 pb-2 cursor-pointer" >
+            <img
+            className="hidden md:block my-2 w-11 h-11  rounded-md"
+            alt="usericon"
+            src={USER_AVATAR}
+          />
+          <p onClick={handleSignOut} className="text-white -m-2 px-1 text-sm ">
+            Sign Out
+          </p>
+            </div>  
           </div>
         )}
-
-        <div
-          className={`absolute right-7 rounded-xl w-[150px] top-[70px] z-50 ${
-            menuOpen ? "flex flex-col justify-around" : "hidden"
-          } bg-brand-charcoal h-[200px]`}>
-          <p className='text-white bg-brand-purple px-1 py-1 text-center'>
-            Namaste , {user?.displayName}
-          </p>
-
-          <Link to={"/"}>
-            <p className='text-white cursor-pointer text-center'>Home</p>
-          </Link>
-          {/* <Link to={"/about"}>
-            <p className='text-white cursor-pointer text-center'>About</p>
-          </Link> */}
-
-          <button
-            onClick={handleSignOut}
-           
-            className='  ml-10 text-xs py-1 rounded-full w-[50%]  hover:bg-opacity-80 bg-brand-red text-white  '>
-            Logout
-          </button>
-        </div>
       </div>
 
 

@@ -3,7 +3,7 @@ import Browse from "./Browse";
 import Login from "./Login";
 
 import Error from "./Error";
-import UserDetailsPage from "./UserDetailsPage";
+
 import MovieDetailsPage from "./MovieDetailsPage";
 
 import Header from "./Header";
@@ -30,10 +30,6 @@ const Body = () => {
     {
       path: "/browse/:movieId",
       element: <MovieDetailsPage/>,
-    },
-    {
-      path: "/user",
-      element: <UserDetailsPage/>,
     },
     {
       path: "/about",
